@@ -444,6 +444,134 @@ pony-bubble{display:none;}
   z-index:7;
 }
 
+
+.hunt-object-layer{
+  position:relative;
+  min-height:150px;
+  z-index:2;
+}
+.hunt-spot{
+  position:absolute;
+}
+.hunt-object{
+  border:none;
+  background:rgba(255,255,255,.92);
+  border-radius:18px;
+  box-shadow:0 6px 14px rgba(0,0,0,.12);
+  padding:10px 12px;
+  min-width:76px;
+  min-height:72px;
+  font-size:1.8rem;
+  font-weight:800;
+  color:var(--ink);
+}
+.hunt-object .label{
+  display:block;
+  font-size:.92rem;
+  margin-top:2px;
+}
+body.calm-mode .floaty,
+body.calm-mode .flower,
+body.calm-mode .feed-choice-pop,
+body.calm-mode .happy-dance,
+body.calm-mode .hunt-runner,
+body.calm-mode .food-arc-inner,
+body.calm-mode .food-arc-outer{
+  animation: none !important;
+  transition-duration: .01s !important;
+}
+
+
+.pony-choice {
+  border:none;
+  background:rgba(255,255,255,.95);
+  border-radius:18px;
+  padding:12px;
+  min-width:72px;
+  min-height:72px;
+  font-size:2rem;
+  box-shadow:0 6px 14px rgba(0,0,0,.12);
+}
+.pony-choice.locked {
+  opacity:.45;
+}
+.pony-choice.selected {
+  outline:4px solid #ffcc66;
+}
+body.calm-mode *,
+body.calm-mode *::before,
+body.calm-mode *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+
+.unlock-overlay{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:45;
+  background:rgba(70,40,20,.25);
+  padding:20px;
+}
+.unlock-overlay.show{display:flex;}
+.unlock-card{
+  width:min(92vw,460px);
+  border-radius:28px;
+  padding:22px 18px 24px;
+  text-align:center;
+  color:#6b3f15;
+  background:linear-gradient(135deg,#fff7d8 0%,#ffd9ef 45%,#dff7ff 100%);
+  box-shadow:0 18px 40px rgba(0,0,0,.22);
+  border:4px solid rgba(255,255,255,.9);
+}
+.unlock-title{
+  font-size:clamp(1.8rem,6vw,2.6rem);
+  margin:6px 0 8px;
+}
+.unlock-item{
+  font-size:4rem;
+  line-height:1;
+  margin:8px 0 10px;
+}
+.unlock-sub{
+  font-size:1.05rem;
+  margin-bottom:12px;
+}
+.unlock-rainbow{
+  font-size:1.6rem;
+  letter-spacing:6px;
+}
+
+
+.draggable-pony-item {
+  user-select:none;
+  -webkit-user-select:none;
+}
+.draggable-pony-item.dragging {
+  cursor:grabbing;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,.18));
+}
+@media (max-width: 640px) {
+  #ponyPreviewWrap {
+    width: 94vw !important;
+    height: 250px !important;
+    min-width: 0 !important;
+  }
+  #ponyPreview {
+    font-size: 150px !important;
+  }
+  #ponyAccessory {
+    font-size: 38px !important;
+  }
+  #ponyBlanket {
+    font-size: 48px !important;
+  }
+}
+
 @media (max-width: 640px) {
   #nameGame {
     padding:12px;
@@ -571,6 +699,134 @@ pony-bubble{display:none;}
   z-index:7;
 }
 
+
+.hunt-object-layer{
+  position:relative;
+  min-height:150px;
+  z-index:2;
+}
+.hunt-spot{
+  position:absolute;
+}
+.hunt-object{
+  border:none;
+  background:rgba(255,255,255,.92);
+  border-radius:18px;
+  box-shadow:0 6px 14px rgba(0,0,0,.12);
+  padding:10px 12px;
+  min-width:76px;
+  min-height:72px;
+  font-size:1.8rem;
+  font-weight:800;
+  color:var(--ink);
+}
+.hunt-object .label{
+  display:block;
+  font-size:.92rem;
+  margin-top:2px;
+}
+body.calm-mode .floaty,
+body.calm-mode .flower,
+body.calm-mode .feed-choice-pop,
+body.calm-mode .happy-dance,
+body.calm-mode .hunt-runner,
+body.calm-mode .food-arc-inner,
+body.calm-mode .food-arc-outer{
+  animation: none !important;
+  transition-duration: .01s !important;
+}
+
+
+.pony-choice {
+  border:none;
+  background:rgba(255,255,255,.95);
+  border-radius:18px;
+  padding:12px;
+  min-width:72px;
+  min-height:72px;
+  font-size:2rem;
+  box-shadow:0 6px 14px rgba(0,0,0,.12);
+}
+.pony-choice.locked {
+  opacity:.45;
+}
+.pony-choice.selected {
+  outline:4px solid #ffcc66;
+}
+body.calm-mode *,
+body.calm-mode *::before,
+body.calm-mode *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+
+.unlock-overlay{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:45;
+  background:rgba(70,40,20,.25);
+  padding:20px;
+}
+.unlock-overlay.show{display:flex;}
+.unlock-card{
+  width:min(92vw,460px);
+  border-radius:28px;
+  padding:22px 18px 24px;
+  text-align:center;
+  color:#6b3f15;
+  background:linear-gradient(135deg,#fff7d8 0%,#ffd9ef 45%,#dff7ff 100%);
+  box-shadow:0 18px 40px rgba(0,0,0,.22);
+  border:4px solid rgba(255,255,255,.9);
+}
+.unlock-title{
+  font-size:clamp(1.8rem,6vw,2.6rem);
+  margin:6px 0 8px;
+}
+.unlock-item{
+  font-size:4rem;
+  line-height:1;
+  margin:8px 0 10px;
+}
+.unlock-sub{
+  font-size:1.05rem;
+  margin-bottom:12px;
+}
+.unlock-rainbow{
+  font-size:1.6rem;
+  letter-spacing:6px;
+}
+
+
+.draggable-pony-item {
+  user-select:none;
+  -webkit-user-select:none;
+}
+.draggable-pony-item.dragging {
+  cursor:grabbing;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,.18));
+}
+@media (max-width: 640px) {
+  #ponyPreviewWrap {
+    width: 94vw !important;
+    height: 250px !important;
+    min-width: 0 !important;
+  }
+  #ponyPreview {
+    font-size: 150px !important;
+  }
+  #ponyAccessory {
+    font-size: 38px !important;
+  }
+  #ponyBlanket {
+    font-size: 48px !important;
+  }
+}
+
 @media (max-width: 640px) {
   .btn.big { min-width: 130px; min-height: 68px; }
   .slot { width:56px; height:66px; }
@@ -602,12 +858,7 @@ pony-bubble{display:none;}
 
   <section id="home" class="panel">
     <div class="card" style="margin-bottom:14px;">
-      <div class="name-row">
-        <label for="childName" style="font-weight:800;">Child name:</label>
-        <input id="childName" maxlength="12" value="SAM" />
-        <button class="btn green" onclick="saveName()">Save Name</button>
-      </div>
-      <div class="audio-hint">Tap any game button once to wake up sound on iPhone or iPad.</div>
+      <div class="audio-hint">Tap the small 👤 button in the top-right for Parent View and settings.</div>
     </div>
     <div class="home-grid">
       <div class="card">
@@ -628,6 +879,14 @@ pony-bubble{display:none;}
         <p>🏆 Spell your name for a pony parade!</p>
         <button class="btn big" onclick="openGame('name')">Play</button>
       </div>
+    
+      <div class="card">
+        <div style="font-size:2.1rem;">🐴🎀</div>
+        <h3>My Pony</h3>
+        <p>🐎 Dress up your pony with ribbons, hats, and colors!</p>
+        <button class="btn big" onclick="openGame('pony')">Play</button>
+      </div>
+
     </div>
   </section>
 
@@ -690,6 +949,37 @@ pony-bubble{display:none;}
 </div>
 
 
+
+  <section id="ponyGame" class="panel hidden">
+    <div class="topbar">
+      <div class="left-tools">
+        <button class="btn secondary" onclick="goHome()">🏠 Home</button>
+      </div>
+      <div class="right-tools">
+        <div class="sticker-bar"><div class="stickers" id="ponyUnlocks">🐎</div></div>
+      </div>
+    </div>
+    <div class="prompt">My Pony</div>
+    <div class="note" id="ponyNote">🐴 Dress up your pony!</div>
+    <div style="display:flex;justify-content:center;align-items:center;margin:12px 0 18px;">
+      <div id="ponyPreviewWrap" style="background:rgba(255,255,255,.92);border-radius:24px;padding:12px 12px;min-width:300px;width:min(92vw,520px);height:280px;position:relative;box-shadow:0 10px 20px rgba(0,0,0,.12);overflow:hidden;">
+        <div id="ponyPreview" style="font-size:180px;line-height:1;position:absolute;left:50%;top:54%;transform:translate(-50%,-50%);">🐎</div>
+        <div id="ponyAccessory" class="draggable-pony-item" data-item-type="accessory" style="position:absolute;left:58%;top:18%;transform:translate(-50%,-50%);font-size:42px;z-index:3;touch-action:none;cursor:grab;">🎀</div>
+        <div id="ponyBlanket" class="draggable-pony-item" data-item-type="blanket" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:54px;z-index:2;touch-action:none;cursor:grab;">🟪</div>
+      </div>
+    </div>
+    <div class="home-grid">
+      <div class="card">
+        <h3>Accessory</h3>
+        <div id="accessoryChoices" class="targets"></div>
+      </div>
+      <div class="card">
+        <h3>Blanket</h3>
+        <div id="blanketChoices" class="targets"></div>
+      </div>
+    </div>
+  </section>
+
 <div class="parent-peek"><button onclick="toggleParentPanel()" title="Parent View">👤</button></div>
 
 <div class="parent-panel" id="parentPanel" onclick="if(event.target===this) toggleParentPanel()">
@@ -698,7 +988,7 @@ pony-bubble{display:none;}
     <div class="setting-row">
       <div>
         <div style="font-weight:800;">Calm Mode</div>
-        <div style="font-size:.95rem;opacity:.85;">Softer colors, gentler feel, less intense motion.</div>
+        <div style="font-size:.95rem;opacity:.85;">Muted sounds, softer colors, and gentler pacing.</div>
       </div>
       <label style="font-weight:800;"><input type="checkbox" id="calmToggle" onchange="toggleCalmMode()"> On</label>
     </div>
@@ -710,8 +1000,27 @@ pony-bubble{display:none;}
       <div>
         <span class="small-stat" id="statFeed">Feed: 0</span>
         <span class="small-stat" id="statHunt">Hunt: 0</span>
-        <span class="small-stat" id="statName">Name: 0</span>
+        <span class="small-stat" id="statName">Name: 0</span><span class="small-stat" id="statPony">Pony: 0</span>
       </div>
+    </div>
+    
+    <div class="setting-row">
+      <div>
+        <div style="font-weight:800;">Child Name</div>
+        <div style="font-size:.95rem;opacity:.85;">Used in Name Builder.</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end;">
+        <input id="parentChildName" maxlength="12" style="padding:10px 12px;border-radius:12px;border:2px solid #dec5a2;min-width:120px;" />
+        <button class="btn green" onclick="saveNameFromParent()">Save</button>
+      </div>
+    </div>
+
+    <div class="setting-row">
+      <div>
+        <div style="font-weight:800;">Calm Mode Note</div>
+        <div style="font-size:.95rem;opacity:.85;">Calm Mode currently mutes all sounds and greatly reduces animation.</div>
+      </div>
+      <div>🌙</div>
     </div>
     <div class="setting-row">
       <div>
@@ -720,9 +1029,33 @@ pony-bubble{display:none;}
       </div>
       <div>🐎✨</div>
     </div>
-    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:14px;">
+    
+    <div class="setting-row">
+      <div>
+        <div style="font-weight:800;">Pony Dress-Up Controls</div>
+        <div style="font-size:.95rem;opacity:.85;">Manage unlocks for My Pony.</div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
+        <button class="btn secondary" onclick="clearPonyProgress()">Clear Pony Progress</button>
+        <button class="btn" onclick="enableAllPonyItems()">Enable All Items</button>
+        <button class="btn secondary" onclick="restorePonyUnlocks()">Restore Earned Only</button>
+      </div>
+    </div>
+
+<div style="display:flex;justify-content:flex-end;gap:10px;margin-top:14px;">
       <button class="btn secondary" onclick="toggleParentPanel()">Close</button>
     </div>
+  </div>
+</div>
+
+
+<div class="unlock-overlay" id="unlockOverlay" onclick="hideUnlockPopup()">
+  <div class="unlock-card">
+    <div class="unlock-rainbow">🌈 🎀 🐎 ✨</div>
+    <div class="unlock-title" id="unlockTitle">New Pony Prize!</div>
+    <div class="unlock-item" id="unlockItem">🎀</div>
+    <div class="unlock-sub" id="unlockSub">Your pony found a new dress-up treat!</div>
+    <button class="btn green" onclick="hideUnlockPopup()">Yay!</button>
   </div>
 </div>
 
@@ -742,7 +1075,7 @@ pony-bubble{display:none;}
 
 <script>
 const state = {
-  childName: 'SAM',
+  childName: 'TORBEN',
   feedStickers: 0,
   huntStickers: 0,
   nameProgress: [],
@@ -754,7 +1087,11 @@ const state = {
   stats: {feed:0,hunt:0,name:0},
   misses: {},
   mastery: {},
-  ponyVoiceIndex: 0
+  ponyVoiceIndex: 0,
+  pony: {accessory:'🎀', blanket:'🟪'},
+  unlocks: {accessories:['🎀'], blankets:['🟪']},
+  pendingUnlock: null,
+  ponyPositions: {accessory:{x:58,y:18}, blanket:{x:50,y:50}}
 };
 
 const feedRounds = [
@@ -767,11 +1104,31 @@ const feedRounds = [
 ];
 
 const huntRounds = [
-  { scene:'park', prompt:'Find something in the pony park that starts with /b/!', items:[{emoji:'⚽',label:'ball',ok:true},{emoji:'🌳',label:'tree'},{emoji:'🛝',label:'slide'}] },
-  { scene:'beach', prompt:'Find something at the pony beach that starts with /s/!', items:[{emoji:'⭐',label:'starfish',ok:true},{emoji:'🍦',label:'ice cream'},{emoji:'⛱️',label:'umbrella'}] },
-  { scene:'kitchen', prompt:'Find something in the pony kitchen that starts with /c/!', items:[{emoji:'🥕',label:'carrot',ok:true},{emoji:'🥛',label:'milk'},{emoji:'🍞',label:'bread'}] },
-  { scene:'trail', prompt:'Find something on the pony trail that starts with /f/!', items:[{emoji:'🌼',label:'flower',ok:true},{emoji:'🪨',label:'rock'},{emoji:'🍃',label:'leaf'}] },
-  { scene:'park', prompt:'Find something in the pony park that starts with /k/!', items:[{emoji:'🪁',label:'kite',ok:true},{emoji:'🌳',label:'tree'},{emoji:'🎈',label:'balloon'}] },
+  { scene:'park', prompt:'Find something in the pony park that starts with /b/!', items:[
+    {emoji:'⚽',label:'ball',ok:true,pos:{left:'8%',top:'18%'}},
+    {emoji:'🌳',label:'tree',pos:{left:'52%',top:'10%'}},
+    {emoji:'🛝',label:'slide',pos:{left:'30%',top:'54%'}}
+  ]},
+  { scene:'beach', prompt:'Find something at the pony beach that starts with /s/!', items:[
+    {emoji:'⭐',label:'starfish',ok:true,pos:{left:'14%',top:'56%'}},
+    {emoji:'🍦',label:'ice cream',pos:{left:'55%',top:'18%'}},
+    {emoji:'⛱️',label:'umbrella',pos:{left:'36%',top:'46%'}}
+  ]},
+  { scene:'kitchen', prompt:'Find something in the pony kitchen that starts with /c/!', items:[
+    {emoji:'🥕',label:'carrot',ok:true,pos:{left:'18%',top:'48%'}},
+    {emoji:'🥛',label:'milk',pos:{left:'58%',top:'18%'}},
+    {emoji:'🍞',label:'bread',pos:{left:'42%',top:'56%'}}
+  ]},
+  { scene:'trail', prompt:'Find something on the pony trail that starts with /f/!', items:[
+    {emoji:'🌼',label:'flower',ok:true,pos:{left:'18%',top:'52%'}},
+    {emoji:'🪨',label:'rock',pos:{left:'52%',top:'58%'}},
+    {emoji:'🍃',label:'leaf',pos:{left:'36%',top:'18%'}}
+  ]},
+  { scene:'park', prompt:'Find something in the pony park that starts with /k/!', items:[
+    {emoji:'🪁',label:'kite',ok:true,pos:{left:'28%',top:'8%'}},
+    {emoji:'🌳',label:'tree',pos:{left:'58%',top:'18%'}},
+    {emoji:'🎈',label:'balloon',pos:{left:'14%',top:'56%'}}
+  ]}
 ];
 
 const paradeIcons = ['🐎','🎀','🏅','⭐','🌼','🧡','🎠','🌈','🦄','🏇'];
@@ -808,6 +1165,7 @@ function unlockAudio() {
 }
 
 function playAudio(id) {
+  if (!id || state.calmMode) return;
   unlockAudio();
   const a = $(id);
   if (!a) return;
@@ -842,7 +1200,7 @@ function speak(text) {
 }
 
 function saveName() {
-  const raw = $('childName').value.toUpperCase().replace(/[^A-Z]/g,'').slice(0,12) || 'SAM';
+  const raw = $('childName').value.toUpperCase().replace(/[^A-Z]/g,'').slice(0,12) || 'TORBEN';
   $('childName').value = raw;
   state.childName = raw;
   resetNameGame();
@@ -853,6 +1211,7 @@ function hideAllGames() {
   $('feedGame').classList.add('hidden');
   $('huntGame').classList.add('hidden');
   $('nameGame').classList.add('hidden');
+  $('ponyGame').classList.add('hidden');
 }
 
 function goHome() {
@@ -876,6 +1235,10 @@ function openGame(game) {
   if (game === 'name') {
     $('nameGame').classList.remove('hidden');
     resetNameGame();
+  }
+  if (game === 'pony') {
+    $('ponyGame').classList.remove('hidden');
+    renderPony();
   }
 }
 
@@ -1046,9 +1409,206 @@ function setPonyBubble(id, text, clearMs=1400) {
   }
 }
 
+function saveNameFromParent() {
+  const raw = $('parentChildName').value.toUpperCase().replace(/[^A-Z]/g,'').slice(0,12) || 'TORBEN';
+  $('parentChildName').value = raw;
+  $('childName') && ($('childName').value = raw);
+  state.childName = raw;
+  saveProgress();
+  resetNameGame();
+  renderPony();
+}
+
+
+const allAccessories = ['🎀','🌼','👑','🎩','🧢'];
+const allBlankets = ['🟪','🟦','🟩','🟥','🟨'];
+
+function maybeUnlockPonyItem() {
+  const totalWins = (state.stats.feed || 0) + (state.stats.hunt || 0) + (state.stats.name || 0);
+  if (totalWins > 0 && totalWins % 3 === 0) {
+    const nextAccessory = allAccessories.find(x => !state.unlocks.accessories.includes(x));
+    const nextBlanket = allBlankets.find(x => !state.unlocks.blankets.includes(x));
+    if (nextAccessory) {
+      state.unlocks.accessories.push(nextAccessory);
+      state.pendingUnlock = {item: nextAccessory, title:'New Pony Hat!', sub:'Your pony won a colorful new hat!'};
+    } else if (nextBlanket) {
+      state.unlocks.blankets.push(nextBlanket);
+      state.pendingUnlock = {item: nextBlanket, title:'New Pony Blanket!', sub:'Your pony won a cozy new blanket color!'};
+    }
+    saveProgress();
+    renderPony();
+  }
+}
+
+function showUnlockPopup() {
+  if (!state.pendingUnlock) return;
+  $('unlockTitle').textContent = state.pendingUnlock.title || 'New Pony Prize!';
+  $('unlockItem').textContent = state.pendingUnlock.item || '🎀';
+  $('unlockSub').textContent = state.pendingUnlock.sub || 'Your pony found a new dress-up treat!';
+  $('unlockOverlay').classList.add('show');
+}
+
+function hideUnlockPopup() {
+  $('unlockOverlay').classList.remove('show');
+  state.pendingUnlock = null;
+  saveProgress();
+}
+
+
+function clamp(val, minv, maxv) {
+  return Math.max(minv, Math.min(maxv, val));
+}
+
+function setPonyItemPosition(el, type, clientX, clientY) {
+  const wrap = $('ponyPreviewWrap');
+  if (!wrap || !el) return;
+  const rect = wrap.getBoundingClientRect();
+  const xPct = clamp(((clientX - rect.left) / rect.width) * 100, 8, 92);
+  const yPct = clamp(((clientY - rect.top) / rect.height) * 100, 8, 92);
+  el.style.left = xPct + '%';
+  el.style.top = yPct + '%';
+  state.ponyPositions[type] = {x:xPct, y:yPct};
+}
+
+function initPonyDragging() {
+  const wrap = $('ponyPreviewWrap');
+  if (!wrap) return;
+  const items = wrap.querySelectorAll('.draggable-pony-item');
+  items.forEach(el => {
+    if (el.dataset.dragBound === '1') return;
+    el.dataset.dragBound = '1';
+    const type = el.dataset.itemType;
+
+    const startDrag = (ev) => {
+      ev.preventDefault();
+      el.classList.add('dragging');
+      const point = ev.touches ? ev.touches[0] : ev;
+      setPonyItemPosition(el, type, point.clientX, point.clientY);
+
+      const move = (e2) => {
+        const p = e2.touches ? e2.touches[0] : e2;
+        setPonyItemPosition(el, type, p.clientX, p.clientY);
+      };
+      const end = () => {
+        el.classList.remove('dragging');
+        saveProgress();
+        window.removeEventListener('mousemove', move);
+        window.removeEventListener('mouseup', end);
+        window.removeEventListener('touchmove', move);
+        window.removeEventListener('touchend', end);
+      };
+
+      window.addEventListener('mousemove', move, {passive:false});
+      window.addEventListener('mouseup', end, {passive:false});
+      window.addEventListener('touchmove', move, {passive:false});
+      window.addEventListener('touchend', end, {passive:false});
+    };
+
+    el.addEventListener('mousedown', startDrag);
+    el.addEventListener('touchstart', startDrag, {passive:false});
+  });
+}
+
+function renderPonyChoices(containerId, items, current, onSelectName) {
+  const el = $(containerId);
+  if (!el) return;
+  el.innerHTML = '';
+  items.forEach(item => {
+    const b = document.createElement('button');
+    b.className = 'pony-choice' + (current === item ? ' selected' : '');
+    b.textContent = item;
+    b.title = current === item ? 'Tap again to turn off' : 'Select';
+    b.onclick = () => {
+      if (onSelectName === 'accessory') {
+        state.pony.accessory = (state.pony.accessory === item) ? '' : item;
+      }
+      if (onSelectName === 'blanket') {
+        state.pony.blanket = (state.pony.blanket === item) ? '' : item;
+      }
+      saveProgress();
+      renderPony();
+    };
+    el.appendChild(b);
+  });
+}
+
+function renderPony() {
+  if ($('ponyAccessory')) {
+    $('ponyAccessory').textContent = state.pony.accessory || '';
+    $('ponyAccessory').style.display = state.pony.accessory ? 'block' : 'none';
+    $('ponyAccessory').style.left = (state.ponyPositions.accessory?.x || 58) + '%';
+    $('ponyAccessory').style.top = (state.ponyPositions.accessory?.y || 18) + '%';
+  }
+  if ($('ponyBlanket')) {
+    $('ponyBlanket').textContent = state.pony.blanket || '';
+    $('ponyBlanket').style.display = state.pony.blanket ? 'block' : 'none';
+    $('ponyBlanket').style.left = (state.ponyPositions.blanket?.x || 50) + '%';
+    $('ponyBlanket').style.top = (state.ponyPositions.blanket?.y || 50) + '%';
+  }
+  renderPonyChoices('accessoryChoices', state.unlocks.accessories || ['🎀'], state.pony.accessory, 'accessory');
+  renderPonyChoices('blanketChoices', state.unlocks.blankets || ['🟪'], state.pony.blanket, 'blanket');
+  if ($('ponyUnlocks')) $('ponyUnlocks').textContent = '✨ ' + String((state.unlocks.accessories.length - 1) + (state.unlocks.blankets.length - 1)) + ' unlocks';
+  if ($('ponyNote')) $('ponyNote').textContent = '🐴 Dress up your pony! Drag items where you want them, or tap a selected item again to turn it off.';
+  initPonyDragging();
+}
+
+
+function clearPonyProgress() {
+  state.pony = {accessory:'🎀', blanket:'🟪'};
+  state.unlocks = {accessories:['🎀'], blankets:['🟪']};
+  state.pendingUnlock = null;
+  state.ponyPositions = {accessory:{x:58,y:18}, blanket:{x:50,y:50}};
+  saveProgress();
+  renderPony();
+  renderStats();
+}
+
+function enableAllPonyItems() {
+  state.unlocks = {
+    accessories: [...allAccessories],
+    blankets: [...allBlankets]
+  };
+  saveProgress();
+  renderPony();
+  renderStats();
+}
+
+function restorePonyUnlocks() {
+  const totalWins = (state.stats.feed || 0) + (state.stats.hunt || 0) + (state.stats.name || 0);
+  const extraUnlocks = Math.floor(totalWins / 3);
+  const accessories = ['🎀'];
+  const blankets = ['🟪'];
+
+  let remaining = extraUnlocks;
+  for (const item of allAccessories.slice(1)) {
+    if (remaining <= 0) break;
+    accessories.push(item);
+    remaining -= 1;
+  }
+  for (const item of allBlankets.slice(1)) {
+    if (remaining <= 0) break;
+    blankets.push(item);
+    remaining -= 1;
+  }
+
+  state.unlocks = {accessories, blankets};
+
+  if (state.pony.accessory && !state.unlocks.accessories.includes(state.pony.accessory)) {
+    state.pony.accessory = '';
+  }
+  if (state.pony.blanket && !state.unlocks.blankets.includes(state.pony.blanket)) {
+    state.pony.blanket = '';
+  }
+
+  saveProgress();
+  renderPony();
+  renderStats();
+}
+
 function toggleParentPanel() {
   $('parentPanel').classList.toggle('show');
   $('calmToggle').checked = !!state.calmMode;
+  if ($('parentChildName')) $('parentChildName').value = state.childName || 'TORBEN';
   renderStats();
 }
 
@@ -1062,6 +1622,7 @@ function renderStats() {
   $('statFeed').textContent = 'Feed: ' + (state.stats.feed || 0);
   $('statHunt').textContent = 'Hunt: ' + (state.stats.hunt || 0);
   $('statName').textContent = 'Name: ' + (state.stats.name || 0);
+  if ($('statPony')) $('statPony').textContent = 'Pony: ' + ((state.unlocks.accessories.length - 1) + (state.unlocks.blankets.length - 1));
 }
 
 function saveProgress() {
@@ -1070,7 +1631,10 @@ function saveProgress() {
     stats: state.stats,
     misses: state.misses,
     mastery: state.mastery,
-    childName: state.childName
+    childName: state.childName,
+    pony: state.pony,
+    unlocks: state.unlocks,
+    ponyPositions: state.ponyPositions
   };
   try { localStorage.setItem('ponyReadingProgress', JSON.stringify(payload)); } catch (e) {}
 }
@@ -1085,7 +1649,11 @@ function loadProgress() {
     state.misses = data.misses || {};
     state.mastery = data.mastery || {};
     state.childName = data.childName || state.childName;
-    $('childName').value = state.childName;
+    state.pony = data.pony || state.pony;
+    state.unlocks = data.unlocks || state.unlocks;
+    state.ponyPositions = data.ponyPositions || state.ponyPositions;
+    if ($('childName')) $('childName').value = state.childName;
+    if ($('parentChildName')) $('parentChildName').value = state.childName;
     document.body.classList.toggle('calm-mode', state.calmMode);
   } catch (e) {}
 }
@@ -1182,7 +1750,9 @@ function newFeedRound() {
           renderStats();
           playAudio(state.calmMode ? 'tapAudio' : 'winAudio');
           awardSticker('feed', b);
+          maybeUnlockPonyItem();
           saveProgress();
+          if (state.pendingUnlock) setTimeout(showUnlockPopup, 850);
           setTimeout(newFeedRound, state.calmMode ? 1300 : 1000);
         });
       } else {
@@ -1206,13 +1776,14 @@ function newHuntRound() {
   const scene = $('huntScene');
   scene.className = 'scene ' + round.scene;
   scene.innerHTML = '';
+
   const row = document.createElement('div');
   row.className = 'targets';
   row.style.marginTop = '12px';
   row.style.position = 'relative';
   row.style.zIndex = '2';
 
-  shuffle(round.items).forEach(item => {
+  round.items.forEach(item => {
     const b = document.createElement('button');
     b.className = 'choice';
     b.innerHTML = '<span>' + item.emoji + '</span><span class="label">' + item.label + '</span>';
@@ -1224,9 +1795,11 @@ function newHuntRound() {
           noteSuccess(round.prompt);
           state.stats.hunt += 1;
           renderStats();
-          playAudio(state.calmMode ? 'tapAudio' : 'winAudio');
+          playAudio(state.calmMode ? null : 'winAudio');
           awardSticker('hunt', b);
+          maybeUnlockPonyItem();
           saveProgress();
+          if (state.pendingUnlock) setTimeout(showUnlockPopup, 900);
           setTimeout(newHuntRound, state.calmMode ? 1450 : 1100);
         });
       } else {
@@ -1287,8 +1860,10 @@ function placeNextLetter(letter, btn) {
     if (state.nameProgress.every(Boolean)) {
       state.stats.name += 1;
       renderStats();
+      maybeUnlockPonyItem();
       saveProgress();
       triggerBigWin('Name Champion!', state.childName + ' is all spelled out!');
+      if (state.pendingUnlock) setTimeout(showUnlockPopup, 1200);
     }
   } else {
     playAudio('tapAudio');
@@ -1308,6 +1883,7 @@ $('bigWinOverlay').addEventListener('click', () => $('bigWinOverlay').classList.
 loadProgress();
 saveName();
 renderStats();
+renderPony();
 goHome();
 </script>
 </body>
