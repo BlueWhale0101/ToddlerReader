@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Letter Adventure Prototype</title>
+  <style>
+    :root {
+      --bg: #fffaf2;
+      --card: #ffffff;
+      --ink: #24324a;
+      --soft: #6b7a90;
+      --accent: #ffb84d;
+      --accent2: #7fd6ff;
+      --accent3: #9ae59a;
+      --accent4: #ff9cc2;
+      --line: #e8dfcf;
+      --shadow: 0 10px 30px rgba(36, 50, 74, 0.12);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Arial Rounded MT Bold", "Trebuchet MS", system-ui, sans-serif;
+      background:
+        radial-gradient(circle at top left, #fff2cc 0, transparent 30%),
+        radial-gradient(circle at top right, #e3f6ff 0, transparent 28%),
+        linear-gradient(180deg, #fffaf2 0%, #fff7ea 100%);
+      color: var(--ink);
+    }
+
+    .app {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--accent), var(--accent4));
+      display: grid;
+      place-items: center;
+      font-size: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    h1, h2, h3, p { margin: 0; }
+
+    .subtitle {
+      color: var(--soft);
+      margin-top: 4px;
+      font-size: 0.98rem;
+    }
+
+    .pill-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 0.95rem;
+    }
+
+    .screen {
+      display: none;
+      animation: fade 0.25s ease;
+    }
+
+    .screen.active { display: block; }
+
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 2px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .hero-card {
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hero h2 {
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      line-height: 1.05;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: var(--soft);
+      line-height: 1.45;
+      max-width: 58ch;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    button {
+      border: none;
+      border-radius: 16px;
+      padding: 14px 18px;
+      font: inherit;
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+    }
+
+    button:hover { transform: translateY(-1px); }
+    button:active { transform: translateY(1px) scale(0.99); }
+
+    .primary { background: var(--accent); color: #3c2b06; box-shadow: var(--shadow); }
+    .secondary { background: var(--accent2); color: #143545; box-shadow: var(--shadow); }
+    .success { background: var(--accent3); color: #184418; box-shadow: var(--shadow); }
+    .pink { background: var(--accent4); color: #5a1835; box-shadow: var(--shadow); }
+    .ghost { background: #fff; border: 2px solid var(--line); color: var(--ink); }
+
+    .mascot {
+      display: grid;
+      place-items: center;
+      min-height: 260px;
+      font-size: clamp(4rem, 8vw, 7rem);
+      background: linear-gradient(180deg, #fff, #fff5fb);
+    }
+
+    .mode-grid {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .mode-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .mode-icon {
+      width: 68px;
+      height: 68px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      font-size: 34px;
+    }
+
+    .mode-card p { color: var(--soft); line-height: 1.4; }
+
+    .settings {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      color: var(--soft);
+    }
+
+    input[type="text"] {
+      width: 100%;
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      font: inherit;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    input[type="text"]:focus { border-color: #cbb78d; }
+
+    .game-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .status {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .status-chip {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 14px;
+    }
+
+    .reward-strip {
+      margin: 12px 0 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+      background: linear-gradient(180deg, #fffef9, #fff5de);
+      border: 2px solid #f1ddb0;
+      border-radius: 22px;
+      padding: 14px 16px;
+    }
+
+    .reward-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .reward-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #fff;
+      border: 2px solid #ecd9ab;
+      box-shadow: 0 4px 10px rgba(36,50,74,0.08);
+      font-size: 1.3rem;
+    }
+
+    .reward-copy {
+      color: #8a6420;
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    .big-prompt {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .sub-prompt {
+      text-align: center;
+      color: var(--soft);
+      margin-bottom: 20px;
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .choice {
+      min-height: 180px;
+      background: linear-gradient(180deg, #fff, #fffdf9);
+      border: 3px solid var(--line);
+      border-radius: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 1.2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .choice .emoji { font-size: 4rem; }
+    .choice.correct, .scene-item.correct { border-color: #88d488; background: #f3fff1; }
+    .choice.wrong, .scene-item.wrong { border-color: #ffb0b0; background: #fff3f3; }
+
+    .choice.correct::after, .scene-item.correct::after, .slot.filled::after {
+      content: '✨';
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      font-size: 1.6rem;
+      animation: bob 0.8s ease infinite alternate;
+    }
+
+    @keyframes bob {
+      from { transform: translateY(0); }
+      to { transform: translateY(-4px) scale(1.05); }
+    }
+
+    .scene-wrap {
+      position: relative;
+    }
+
+    .scene-title {
+      text-align: center;
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+      color: #4c647a;
+    }
+
+    .scene {
+      border: 3px dashed #cddda8;
+      border-radius: 28px;
+      padding: 18px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+      min-height: 360px;
+    }
+
+    .scene[data-theme="park"] {
+      background: linear-gradient(180deg, #cfeeff 0%, #edfbdc 62%, #d2efad 100%);
+      border-color: #b9d48b;
+    }
+
+    .scene[data-theme="kitchen"] {
+      background: linear-gradient(180deg, #fff6df 0%, #fffef7 50%, #ffe7c6 100%);
+      border-color: #f0d6a6;
+    }
+
+    .scene[data-theme="beach"] {
+      background: linear-gradient(180deg, #bfeaff 0%, #def7ff 36%, #fff0c9 37%, #f3d99f 100%);
+      border-color: #a8d7ec;
+    }
+
+    .scene-decor {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.35;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 18px;
+    }
+
+    .scene-item {
+      min-height: 130px;
+      background: rgba(255,255,255,0.9);
+      border: 3px solid rgba(255,255,255,0.6);
+      border-radius: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.05rem;
+      gap: 8px;
+      box-shadow: 0 8px 16px rgba(36, 50, 74, 0.08);
+      position: relative;
+      z-index: 1;
+    }
+
+    .scene-item .emoji { font-size: 3.2rem; }
+
+    .celebration {
+      min-height: 62px;
+      margin: 18px auto 0;
+      border-radius: 20px;
+      padding: 12px 16px;
+      text-align: center;
+      font-size: 1.1rem;
+      background: linear-gradient(180deg, #fffaf0, #fff1d4);
+      border: 2px solid #f0ddb1;
+      color: #8a6420;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .celebration-pop {
+      animation: pop 0.25s ease;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.95); }
+      100% { transform: scale(1); }
+    }
+
+    .builder-top {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .name-preview {
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      background: #fffdf6;
+      border: 3px dashed #e0d1ab;
+      border-radius: 20px;
+      padding: 14px 18px;
+      min-width: 220px;
+      text-align: center;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .drop-zone {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .slot {
+      width: 72px;
+      height: 82px;
+      border-radius: 18px;
+      border: 3px dashed #d3c298;
+      background: #fffdf7;
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+      text-transform: uppercase;
+      position: relative;
+    }
+
+    .slot.filled {
+      background: linear-gradient(180deg, #fffef5, #f4ffe8);
+      border-style: solid;
+      border-color: #b8dc8d;
+    }
+
+    .letter-bank {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .letter-btn {
+      width: 76px;
+      height: 86px;
+      font-size: 2rem;
+      text-transform: uppercase;
+      border-radius: 20px;
+      background: #ffffff;
+      border: 3px solid #dfd7c9;
+      box-shadow: var(--shadow);
+    }
+
+    .helper {
+      background: #f8fbff;
+      border: 2px solid #d6e7f4;
+      color: #4c647a;
+      border-radius: 16px;
+      padding: 14px;
+      margin-top: 18px;
+      line-height: 1.45;
+    }
+
+    .feedback {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 1.1rem;
+      min-height: 1.5em;
+    }
+
+    .success-text { color: #2d7d2d; }
+    .error-text { color: #ad4b4b; }
+
+    .footer-note {
+      margin-top: 22px;
+      color: var(--soft);
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 900px) {
+      .hero, .settings, .mode-grid, .choice-grid { grid-template-columns: 1fr; }
+      .scene { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 560px) {
+      .app { padding: 14px; }
+      .scene { grid-template-columns: 1fr; }
+      .slot, .letter-btn { width: 62px; height: 72px; }
+      .logo { width: 56px; height: 56px; font-size: 28px; }
+      .reward-strip { gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo">📚</div>
+        <div>
+          <h1>Letter Adventure</h1>
+          <p class="subtitle">A clickable prototype for toddler-friendly early reading play</p>
+        </div>
+      </div>
+      <div class="pill-row">
+        <div class="pill">Ages: toddler / preschool</div>
+        <div class="pill">Focus: sounds + letters</div>
+        <div class="pill">Prototype: clickable</div>
+      </div>
+    </div>
+
+    <section id="home" class="screen active">
+      <div class="hero">
+        <div class="card hero-card">
+          <div>
+            <h2>Play with sounds.<br>Notice letters.<br>Build a name.</h2>
+            <p>
+              This prototype includes three gentle game modes: <strong>Find the Sound</strong>, <strong>Letter Hunt</strong>, and <strong>Name Builder</strong>. Everything is designed to feel simple, cheerful, and adult-guided.
+            </p>
+          </div>
+          <div class="button-row">
+            <button class="primary" onclick="showScreen('findSound')">▶ Start Find the Sound</button>
+            <button class="secondary" onclick="showScreen('letterHunt')">🔎 Start Letter Hunt</button>
+            <button class="pink" onclick="prepareNameBuilder(); showScreen('nameBuilder')">🧩 Start Name Builder</button>
+          </div>
+        </div>
+        <div class="card mascot">
+          🦊✨
+        </div>
+      </div>
+
+      <div class="mode-grid">
+        <div class="card mode-card">
+          <div class="mode-icon" style="background:#fff1cf;">🔊</div>
+          <h3>Find the Sound</h3>
+          <p>Hear a beginning sound, then tap the picture that matches. Example: “Find /d/” and choose the dog.</p>
+          <button class="primary" onclick="showScreen('findSound')">Open</button>
+        </div>
+        <div class="card mode-card">
+          <div class="mode-icon" style="background:#ddf5ff;">🌳</div>
+          <h3>Letter Hunt</h3>
+          <p>Explore a playful scene and tap something that starts with the target sound or letter.</p>
+          <button class="secondary" onclick="showScreen('letterHunt')">Open</button>
+        </div>
+        <div class="card mode-card">
+          <div class="mode-icon" style="background:#ffe1ec;">🔤</div>
+          <h3>Name Builder</h3>
+          <p>Build your child’s name from a friendly letter bank, starting with the most meaningful word of all.</p>
+          <button class="pink" onclick="prepareNameBuilder(); showScreen('nameBuilder')">Open</button>
+        </div>
+      </div>
+
+      <div class="settings">
+        <div class="card">
+          <h3 style="margin-bottom:14px;">Child name</h3>
+          <label for="childName">Used by Name Builder</label>
+          <input id="childName" type="text" value="Sam" maxlength="10" oninput="prepareNameBuilder()" />
+        </div>
+        <div class="card">
+          <h3 style="margin-bottom:14px;">Prototype notes</h3>
+          <div class="helper">
+            This version is intentionally simple. It shows interaction design, feedback, and flow. A fuller version could add sound playback, progression, sticker collections, adaptive difficulty, and parent settings.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="findSound" class="screen">
+      <div class="card">
+        <div class="game-header">
+          <div>
+            <h2>Find the Sound</h2>
+            <p class="subtitle">Tap the picture that starts with the target sound.</p>
+          </div>
+          <div class="status">
+            <div class="status-chip">Round: <span id="fsRound">1</span></div>
+            <div class="status-chip">Stars: <span id="fsStars">0</span> ⭐</div>
+          </div>
+        </div>
+        <div class="reward-strip">
+          <div class="reward-badges" id="fsRewards"></div>
+          <div class="reward-copy">Collect sparkly stickers as you play.</div>
+        </div>
+        <div class="big-prompt" id="fsPrompt">Find the /d/ sound</div>
+        <div class="sub-prompt" id="fsPromptSub">Say it together: “d-d-dog”</div>
+        <div class="button-row" style="justify-content:center; margin-bottom:20px;">
+          <button class="ghost" onclick="speakCurrentSound()">🔊 Hear the prompt</button>
+          <button class="ghost" onclick="nextFindSound(true)">⟳ New round</button>
+          <button class="ghost" onclick="showScreen('home')">← Home</button>
+        </div>
+        <div id="fsChoices" class="choice-grid"></div>
+        <div id="fsFeedback" class="feedback"></div>
+        <div id="fsCelebrate" class="celebration">🌟 Tap the picture that matches the sound.</div>
+        <div class="footer-note">Adult prompt idea: “Can you find the picture that starts with this sound?”</div>
+      </div>
+    </section>
+
+    <section id="letterHunt" class="screen">
+      <div class="card">
+        <div class="game-header">
+          <div>
+            <h2>Letter Hunt</h2>
+            <p class="subtitle">Tap something in the scene that matches the target letter or sound.</p>
+          </div>
+          <div class="status">
+            <div class="status-chip">Round: <span id="lhRound">1</span></div>
+            <div class="status-chip">Stars: <span id="lhStars">0</span> ⭐</div>
+          </div>
+        </div>
+        <div class="reward-strip">
+          <div class="reward-badges" id="lhRewards"></div>
+          <div class="reward-copy">Each correct tap earns a tiny treasure.</div>
+        </div>
+        <div class="big-prompt" id="lhPrompt">Find something that starts with B</div>
+        <div class="sub-prompt" id="lhPromptSub">Try saying: “b-b-ball”</div>
+        <div class="button-row" style="justify-content:center; margin-bottom:20px;">
+          <button class="ghost" onclick="nextLetterHunt(true)">⟳ New scene</button>
+          <button class="ghost" onclick="showScreen('home')">← Home</button>
+        </div>
+        <div class="scene-wrap">
+          <div class="scene-title" id="lhSceneTitle">Sunny Park</div>
+          <div id="lhScene" class="scene" data-theme="park"></div>
+        </div>
+        <div id="lhFeedback" class="feedback"></div>
+        <div id="lhCelebrate" class="celebration">🧭 Look around the scene and hunt for the right picture.</div>
+        <div class="helper">Prototype idea for later: this could become larger tap zones, animated hotspots, hidden objects, and follow-up prompts like “Can you find another B thing?”</div>
+      </div>
+    </section>
+
+    <section id="nameBuilder" class="screen">
+      <div class="card">
+        <div class="game-header">
+          <div>
+            <h2>Name Builder</h2>
+            <p class="subtitle">Tap letters in order to build your child’s name.</p>
+          </div>
+          <div class="status">
+            <div class="status-chip">Name: <span id="nbNameChip">SAM</span></div>
+            <div class="status-chip">Built: <span id="nbBuiltCount">0</span></div>
+          </div>
+        </div>
+
+        <div class="reward-strip">
+          <div class="reward-badges" id="nbRewards"></div>
+          <div class="reward-copy">Fill the name board to win a parade of cheers.</div>
+        </div>
+
+        <div class="builder-top">
+          <div class="name-preview" id="namePreview">SAM</div>
+          <div class="sub-prompt">Tap the next letter you hear or see.</div>
+          <div class="button-row" style="justify-content:center; margin-top:0;">
+            <button class="ghost" onclick="prepareNameBuilder()">⟳ Reset letters</button>
+            <button class="ghost" onclick="showScreen('home')">← Home</button>
+          </div>
+        </div>
+
+        <div id="dropZone" class="drop-zone"></div>
+        <div id="letterBank" class="letter-bank"></div>
+        <div id="nbFeedback" class="feedback"></div>
+        <div id="nbCelebrate" class="celebration">🎈 Build the name one happy letter at a time.</div>
+        <div class="helper">Adult prompt idea: “Let’s build your name. What letter comes first?”</div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const rewardIcons = ['⭐','✨','🎉','🪄','🌈','💎','🎈','🍪'];
+
+    const findSoundRounds = [
+      {
+        sound: '/d/',
+        clue: 'd-d-dog',
+        correct: 'dog',
+        options: [
+          { key: 'dog', emoji: '🐶', label: 'Dog' },
+          { key: 'apple', emoji: '🍎', label: 'Apple' },
+          { key: 'car', emoji: '🚗', label: 'Car' }
+        ]
+      },
+      {
+        sound: '/m/',
+        clue: 'm-m-moon',
+        correct: 'moon',
+        options: [
+          { key: 'sun', emoji: '☀️', label: 'Sun' },
+          { key: 'moon', emoji: '🌙', label: 'Moon' },
+          { key: 'fish', emoji: '🐟', label: 'Fish' }
+        ]
+      },
+      {
+        sound: '/b/',
+        clue: 'b-b-ball',
+        correct: 'ball',
+        options: [
+          { key: 'ball', emoji: '⚽', label: 'Ball' },
+          { key: 'tree', emoji: '🌳', label: 'Tree' },
+          { key: 'cat', emoji: '🐱', label: 'Cat' }
+        ]
+      },
+      {
+        sound: '/s/',
+        clue: 's-s-sun',
+        correct: 'sun',
+        options: [
+          { key: 'book', emoji: '📘', label: 'Book' },
+          { key: 'sun', emoji: '☀️', label: 'Sun' },
+          { key: 'dog', emoji: '🐶', label: 'Dog' }
+        ]
+      }
+    ];
+
+    const huntRounds = [
+      {
+        theme: 'park',
+        sceneTitle: 'Sunny Park',
+        decor: ['☁️', '🪁', '🌼'],
+        targetLetter: 'B',
+        clue: 'b-b-ball',
+        correct: 'ball',
+        items: [
+          { key: 'ball', emoji: '⚽', label: 'Ball' },
+          { key: 'sun', emoji: '☀️', label: 'Sun' },
+          { key: 'tree', emoji: '🌳', label: 'Tree' },
+          { key: 'kite', emoji: '🪁', label: 'Kite' },
+          { key: 'dog', emoji: '🐶', label: 'Dog' },
+          { key: 'bench', emoji: '🪑', label: 'Bench' }
+        ]
+      },
+      {
+        theme: 'kitchen',
+        sceneTitle: 'Cozy Kitchen',
+        decor: ['🍽️', '🫖', '🥄'],
+        targetLetter: 'A',
+        clue: 'a-a-apple',
+        correct: 'apple',
+        items: [
+          { key: 'apple', emoji: '🍎', label: 'Apple' },
+          { key: 'cup', emoji: '🥤', label: 'Cup' },
+          { key: 'pan', emoji: '🍳', label: 'Pan' },
+          { key: 'milk', emoji: '🥛', label: 'Milk' },
+          { key: 'spoon', emoji: '🥄', label: 'Spoon' },
+          { key: 'bread', emoji: '🍞', label: 'Bread' }
+        ]
+      },
+      {
+        theme: 'beach',
+        sceneTitle: 'Bright Beach',
+        decor: ['☀️', '🐚', '🌊'],
+        targetLetter: 'S',
+        clue: 's-s-shell',
+        correct: 'shell',
+        items: [
+          { key: 'shell', emoji: '🐚', label: 'Shell' },
+          { key: 'ball', emoji: '🏐', label: 'Ball' },
+          { key: 'fish', emoji: '🐟', label: 'Fish' },
+          { key: 'boat', emoji: '⛵', label: 'Boat' },
+          { key: 'sun', emoji: '☀️', label: 'Sun' },
+          { key: 'crab', emoji: '🦀', label: 'Crab' }
+        ]
+      },
+      {
+        theme: 'park',
+        sceneTitle: 'Tree Trail',
+        decor: ['🍃', '🐞', '🌳'],
+        targetLetter: 'T',
+        clue: 't-t-tree',
+        correct: 'tree',
+        items: [
+          { key: 'tree', emoji: '🌳', label: 'Tree' },
+          { key: 'moon', emoji: '🌙', label: 'Moon' },
+          { key: 'ball', emoji: '⚽', label: 'Ball' },
+          { key: 'dog', emoji: '🐶', label: 'Dog' },
+          { key: 'car', emoji: '🚗', label: 'Car' },
+          { key: 'book', emoji: '📘', label: 'Book' }
+        ]
+      }
+    ];
+
+    let fsIndex = 0;
+    let fsStars = 0;
+    let lhIndex = 0;
+    let lhStars = 0;
+    let builderState = [];
+
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function shuffle(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function renderRewards(containerId, count) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+      const shown = Math.max(3, Math.min(8, count || 3));
+      for (let i = 0; i < shown; i++) {
+        const el = document.createElement('div');
+        el.className = 'reward-badge';
+        el.textContent = i < count ? rewardIcons[i % rewardIcons.length] : '◌';
+        container.appendChild(el);
+      }
+    }
+
+    function showCelebration(id, text) {
+      const el = document.getElementById(id);
+      el.textContent = text;
+      el.classList.remove('celebration-pop');
+      void el.offsetWidth;
+      el.classList.add('celebration-pop');
+    }
+
+
+    let audioCtx = null;
+
+    function getAudioCtx() {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextClass) return null;
+      if (!audioCtx) audioCtx = new AudioContextClass();
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume().catch(() => {});
+      }
+      return audioCtx;
+    }
+
+    function playTone(freq = 440, duration = 0.08, type = 'sine', volume = 0.06, startDelay = 0) {
+      const ctx = getAudioCtx();
+      if (!ctx) return;
+      const now = ctx.currentTime + startDelay;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, now);
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(volume, now + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + duration + 0.02);
+    }
+
+    function playSelectSound() {
+      playTone(520, 0.05, 'triangle', 0.045, 0);
+      playTone(660, 0.06, 'triangle', 0.03, 0.03);
+    }
+
+    function playWinSound() {
+      playTone(523.25, 0.08, 'sine', 0.05, 0);
+      playTone(659.25, 0.09, 'sine', 0.05, 0.08);
+      playTone(783.99, 0.11, 'sine', 0.055, 0.16);
+      playTone(1046.5, 0.16, 'sine', 0.06, 0.27);
+    }
+
+    function renderFindSound() {
+      const round = findSoundRounds[fsIndex];
+      document.getElementById('fsRound').textContent = String(fsIndex + 1);
+      document.getElementById('fsStars').textContent = String(fsStars);
+      document.getElementById('fsPrompt').textContent = `Find the ${round.sound} sound`;
+      document.getElementById('fsPromptSub').textContent = `Say it together: “${round.clue}”`;
+      document.getElementById('fsFeedback').textContent = '';
+      document.getElementById('fsFeedback').className = 'feedback';
+      renderRewards('fsRewards', fsStars);
+      showCelebration('fsCelebrate', '🌟 Tap the picture that matches the sound.');
+
+      const wrap = document.getElementById('fsChoices');
+      wrap.innerHTML = '';
+      shuffle(round.options).forEach(option => {
+        const btn = document.createElement('button');
+        btn.className = 'choice';
+        btn.innerHTML = `<div class="emoji">${option.emoji}</div><div>${option.label}</div>`;
+        btn.onclick = () => {
+          playSelectSound();
+          const correct = option.key === round.correct;
+          [...wrap.children].forEach(child => child.disabled = true);
+          btn.classList.add(correct ? 'correct' : 'wrong');
+          if (correct) {
+            playWinSound();
+            fsStars += 1;
+            document.getElementById('fsFeedback').textContent = `Nice job! ${option.label} starts with ${round.sound}`;
+            document.getElementById('fsFeedback').classList.add('success-text');
+            document.getElementById('fsStars').textContent = String(fsStars);
+            renderRewards('fsRewards', fsStars);
+            showCelebration('fsCelebrate', `🎉 Hooray! You won a ${rewardIcons[(fsStars - 1) % rewardIcons.length]} sticker for hearing ${round.sound}.`);
+          } else {
+            document.getElementById('fsFeedback').textContent = `Good try. Let's look for the one that starts with ${round.sound}.`;
+            document.getElementById('fsFeedback').classList.add('error-text');
+            showCelebration('fsCelebrate', `💛 Almost! Let's find the picture that says ${round.clue}.`);
+          }
+          setTimeout(() => nextFindSound(), 1100);
+        };
+        wrap.appendChild(btn);
+      });
+    }
+
+    function nextFindSound(forceRandom = false) {
+      if (forceRandom) {
+        fsIndex = Math.floor(Math.random() * findSoundRounds.length);
+      } else {
+        fsIndex = (fsIndex + 1) % findSoundRounds.length;
+      }
+      renderFindSound();
+    }
+
+    function speakCurrentSound() {
+      const round = findSoundRounds[fsIndex];
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(`Find the ${round.sound} sound. ${round.clue}`);
+        utterance.rate = 0.85;
+        speechSynthesis.cancel();
+        speechSynthesis.speak(utterance);
+      }
+    }
+
+    function renderLetterHunt() {
+      const round = huntRounds[lhIndex];
+      document.getElementById('lhRound').textContent = String(lhIndex + 1);
+      document.getElementById('lhStars').textContent = String(lhStars);
+      document.getElementById('lhPrompt').textContent = `Find something that starts with ${round.targetLetter}`;
+      document.getElementById('lhPromptSub').textContent = `Try saying: “${round.clue}”`;
+      document.getElementById('lhFeedback').textContent = '';
+      document.getElementById('lhFeedback').className = 'feedback';
+      document.getElementById('lhSceneTitle').textContent = round.sceneTitle;
+      renderRewards('lhRewards', lhStars);
+      showCelebration('lhCelebrate', '🧭 Look around the scene and hunt for the right picture.');
+
+      const scene = document.getElementById('lhScene');
+      scene.dataset.theme = round.theme;
+      scene.innerHTML = `<div class="scene-decor"><span>${round.decor[0]}</span><span>${round.decor[1]}</span><span>${round.decor[2]}</span></div>`;
+      shuffle(round.items).forEach(item => {
+        const btn = document.createElement('button');
+        btn.className = 'scene-item';
+        btn.innerHTML = `<div class="emoji">${item.emoji}</div><div>${item.label}</div>`;
+        btn.onclick = () => {
+          playSelectSound();
+          const correct = item.key === round.correct;
+          [...scene.querySelectorAll('.scene-item')].forEach(child => child.disabled = true);
+          btn.classList.add(correct ? 'correct' : 'wrong');
+          if (correct) {
+            playWinSound();
+            lhStars += 1;
+            document.getElementById('lhFeedback').textContent = `You found it! ${item.label} starts with ${round.targetLetter}.`;
+            document.getElementById('lhFeedback').classList.add('success-text');
+            document.getElementById('lhStars').textContent = String(lhStars);
+            renderRewards('lhRewards', lhStars);
+            showCelebration('lhCelebrate', `🏆 Treasure found! You earned ${rewardIcons[(lhStars - 1) % rewardIcons.length]} in the ${round.sceneTitle}.`);
+          } else {
+            document.getElementById('lhFeedback').textContent = `Nice try. Let's hunt for a ${round.targetLetter} word.`;
+            document.getElementById('lhFeedback').classList.add('error-text');
+            showCelebration('lhCelebrate', `🔎 Keep looking in the ${round.sceneTitle}. Listen for ${round.clue}.`);
+          }
+          setTimeout(() => nextLetterHunt(), 1150);
+        };
+        scene.appendChild(btn);
+      });
+    }
+
+    function nextLetterHunt(forceRandom = false) {
+      if (forceRandom) {
+        lhIndex = Math.floor(Math.random() * huntRounds.length);
+      } else {
+        lhIndex = (lhIndex + 1) % huntRounds.length;
+      }
+      renderLetterHunt();
+    }
+
+    function prepareNameBuilder() {
+      const raw = document.getElementById('childName').value || 'Sam';
+      const clean = raw.replace(/[^a-z]/gi, '').slice(0, 8) || 'Sam';
+      const target = clean.toUpperCase().split('');
+      builderState = [];
+
+      document.getElementById('nbNameChip').textContent = target.join('');
+      document.getElementById('namePreview').textContent = target.join('');
+      document.getElementById('nbBuiltCount').textContent = '0';
+      document.getElementById('nbFeedback').textContent = '';
+      document.getElementById('nbFeedback').className = 'feedback';
+      renderRewards('nbRewards', 0);
+      showCelebration('nbCelebrate', '🎈 Build the name one happy letter at a time.');
+
+      const dropZone = document.getElementById('dropZone');
+      dropZone.innerHTML = '';
+      target.forEach(() => {
+        const slot = document.createElement('div');
+        slot.className = 'slot';
+        slot.textContent = '•';
+        dropZone.appendChild(slot);
+      });
+
+      const distractors = ['B','M','S','T','A','R','L','O','N','D','E','C','P'];
+      const bankLetters = shuffle([...target, ...shuffle(distractors.filter(l => !target.includes(l))).slice(0, Math.max(2, 6 - target.length))]);
+      const bank = document.getElementById('letterBank');
+      bank.innerHTML = '';
+
+      bankLetters.forEach((letter, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'letter-btn';
+        btn.textContent = letter;
+        btn.dataset.letter = letter;
+        btn.dataset.idx = idx;
+        btn.onclick = () => chooseBuilderLetter(letter, btn, target);
+        bank.appendChild(btn);
+      });
+    }
+
+    function chooseBuilderLetter(letter, btn, target) {
+      playSelectSound();
+      const nextIndex = builderState.length;
+      const needed = target[nextIndex];
+      const feedback = document.getElementById('nbFeedback');
+      if (letter === needed) {
+        playWinSound();
+        builderState.push(letter);
+        btn.disabled = true;
+        btn.style.opacity = '0.35';
+        const slot = document.querySelectorAll('.slot')[nextIndex];
+        slot.textContent = letter;
+        slot.classList.add('filled');
+        document.getElementById('nbBuiltCount').textContent = String(builderState.length);
+        feedback.textContent = `Yes! ${letter} is next.`;
+        feedback.className = 'feedback success-text';
+        renderRewards('nbRewards', builderState.length);
+        showCelebration('nbCelebrate', `✨ Great pick! ${builderState.length} letter${builderState.length === 1 ? '' : 's'} in place.`);
+        if (builderState.length === target.length) {
+          feedback.textContent = `Hooray! You built ${target.join('')}!`;
+          feedback.className = 'feedback success-text';
+          showCelebration('nbCelebrate', `🎉 Hooray! You built ${target.join('')}! Cue the happy parade!`);
+        }
+      } else {
+        feedback.textContent = `Try the next letter in ${target.join('')}.`;
+        feedback.className = 'feedback error-text';
+        showCelebration('nbCelebrate', `💛 Good try. Let's find the next letter together.`);
+      }
+    }
+
+    renderFindSound();
+    renderLetterHunt();
+    prepareNameBuilder();
+  </script>
+</body>
+</html>
