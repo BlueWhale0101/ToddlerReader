@@ -349,6 +349,101 @@ button, input { font: inherit; }
   padding-right: 90px; /* space for horse on the right */
 }
 
+
+.stickers.empty-slots {
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  padding-top:12px;
+}
+.empty-slot {
+  width:30px;
+  height:30px;
+  border:2px dashed #c79b67;
+  border-radius:10px;
+  background:rgba(255,255,255,.4);
+}
+.parent-peek {
+  position:fixed;
+  top:8px;
+  right:10px;
+  z-index:15;
+  opacity:.22;
+  font-size:.9rem;
+  user-select:none;
+}
+.parent-peek button{
+  border:none;
+  background:rgba(255,255,255,.65);
+  border-radius:12px;
+  padding:6px 8px;
+  font:inherit;
+}
+.parent-panel{
+  position:fixed;
+  inset:0;
+  z-index:40;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:rgba(30,20,10,.45);
+  padding:16px;
+}
+.parent-panel.show{display:flex;}
+.parent-card{
+  width:min(94vw,560px);
+  background:#fffaf2;
+  border-radius:24px;
+  padding:18px;
+  box-shadow:0 20px 50px rgba(0,0,0,.22);
+  color:#5a3c22;
+}
+.parent-card h3{margin:0 0 10px;}
+.setting-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin:12px 0;
+  padding:10px 12px;
+  background:#fff;
+  border-radius:16px;
+}
+.small-stat{
+  display:inline-block;
+  background:#fff;
+  border-radius:14px;
+  padding:8px 10px;
+  margin:6px 6px 0 0;
+}
+body.calm-mode {
+  background:
+    radial-gradient(circle at 50% -10%, #f6f0c7 0 14%, transparent 15%),
+    linear-gradient(#c5d7e2 0%, #d8e3e8 35%, #e8eff2 52%, #a4b891 53%, #8ea07d 100%);
+}
+body.calm-mode .panel,
+body.calm-mode .card,
+body.calm-mode .sticker-bar,
+body.calm-mode .win-card{
+  filter:saturate(.75) brightness(.98);
+}
+body.calm-mode .floaty,
+body.calm-mode .flower{
+  animation-duration: 6s !important;
+}
+pony-bubble{display:none;}
+.pony-bubble{
+  position:absolute;
+  left:16px;
+  top:16px;
+  background:rgba(255,255,255,.9);
+  border-radius:18px;
+  padding:8px 12px;
+  font-weight:800;
+  box-shadow:0 4px 12px rgba(0,0,0,.1);
+  z-index:7;
+}
+
 @media (max-width: 640px) {
   #nameGame {
     padding:12px;
@@ -381,6 +476,101 @@ button, input { font: inherit; }
   padding-right: 90px; /* space for horse on the right */
 }
 
+
+.stickers.empty-slots {
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  padding-top:12px;
+}
+.empty-slot {
+  width:30px;
+  height:30px;
+  border:2px dashed #c79b67;
+  border-radius:10px;
+  background:rgba(255,255,255,.4);
+}
+.parent-peek {
+  position:fixed;
+  top:8px;
+  right:10px;
+  z-index:15;
+  opacity:.22;
+  font-size:.9rem;
+  user-select:none;
+}
+.parent-peek button{
+  border:none;
+  background:rgba(255,255,255,.65);
+  border-radius:12px;
+  padding:6px 8px;
+  font:inherit;
+}
+.parent-panel{
+  position:fixed;
+  inset:0;
+  z-index:40;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:rgba(30,20,10,.45);
+  padding:16px;
+}
+.parent-panel.show{display:flex;}
+.parent-card{
+  width:min(94vw,560px);
+  background:#fffaf2;
+  border-radius:24px;
+  padding:18px;
+  box-shadow:0 20px 50px rgba(0,0,0,.22);
+  color:#5a3c22;
+}
+.parent-card h3{margin:0 0 10px;}
+.setting-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin:12px 0;
+  padding:10px 12px;
+  background:#fff;
+  border-radius:16px;
+}
+.small-stat{
+  display:inline-block;
+  background:#fff;
+  border-radius:14px;
+  padding:8px 10px;
+  margin:6px 6px 0 0;
+}
+body.calm-mode {
+  background:
+    radial-gradient(circle at 50% -10%, #f6f0c7 0 14%, transparent 15%),
+    linear-gradient(#c5d7e2 0%, #d8e3e8 35%, #e8eff2 52%, #a4b891 53%, #8ea07d 100%);
+}
+body.calm-mode .panel,
+body.calm-mode .card,
+body.calm-mode .sticker-bar,
+body.calm-mode .win-card{
+  filter:saturate(.75) brightness(.98);
+}
+body.calm-mode .floaty,
+body.calm-mode .flower{
+  animation-duration: 6s !important;
+}
+pony-bubble{display:none;}
+.pony-bubble{
+  position:absolute;
+  left:16px;
+  top:16px;
+  background:rgba(255,255,255,.9);
+  border-radius:18px;
+  padding:8px 12px;
+  font-weight:800;
+  box-shadow:0 4px 12px rgba(0,0,0,.1);
+  z-index:7;
+}
+
 @media (max-width: 640px) {
   .btn.big { min-width: 130px; min-height: 68px; }
   .slot { width:56px; height:66px; }
@@ -407,7 +597,7 @@ button, input { font: inherit; }
 <div class="app">
   <div class="header">
     <div class="title">🐎 Pony Reading Adventure</div>
-    <p class="subtitle">Find sounds, hunt in pony scenes, and build your name.</p>
+    <p class="subtitle">Play, explore, and learn with your pony pal.</p>
   </div>
 
   <section id="home" class="panel">
@@ -423,19 +613,19 @@ button, input { font: inherit; }
       <div class="card">
         <div style="font-size:2.1rem;">🎵🐴</div>
         <h3>Feed the Pony</h3>
-        <p>Feed the pony the right food based on the sound, with a chomp animation!</p>
+        <p>🐴 Feed your pony a yummy snack!</p>
         <button class="btn big" onclick="openGame('feed')">Play</button>
       </div>
       <div class="card">
         <div style="font-size:2.1rem;">🌼🏇</div>
         <h3>Letter Hunt</h3>
-        <p>Explore pony scenes like the park, beach, trail, and kitchen.</p>
+        <p>🐎 Go on a pony adventure!</p>
         <button class="btn big" onclick="openGame('hunt')">Play</button>
       </div>
       <div class="card">
         <div style="font-size:2.1rem;">🏆🔤</div>
         <h3>Name Builder</h3>
-        <p>Spell your name and get the biggest pony parade celebration.</p>
+        <p>🏆 Spell your name for a pony parade!</p>
         <button class="btn big" onclick="openGame('name')">Play</button>
       </div>
     </div>
@@ -445,8 +635,7 @@ button, input { font: inherit; }
     <div class="topbar">
       <div class="left-tools">
         <button class="btn secondary" onclick="goHome()">🏠 Home</button>
-        <button class="btn" onclick="newFeedRound()">🔄 New Round</button>
-      </div>
+              </div>
       <div class="right-tools">
         <div class="sticker-bar" id="feedStickerBar"><div class="stickers" id="feedStickers"></div></div>
       </div>
@@ -454,14 +643,14 @@ button, input { font: inherit; }
     <div class="prompt" id="feedPrompt">Feed the pony...</div>
     <div class="feed-wrap">
       <div class="pony-pen">
-        <div class="feed-cloud" id="feedCloud">🐴 Feed me!</div>
+        <div class="feed-cloud" id="feedCloud">🐴 Feed me!</div><div class="pony-bubble" id="ponyBubbleFeed"></div>
         <div class="feed-mouth" id="feedMouth"></div>
         <div class="feed-horse" id="feedHorse">🐎</div>
       </div>
       <div class="note" id="feedNote"></div>
       <div class="feed-choices" id="feedChoices"></div>
       <div style="text-align:center; margin-top:4px;">
-        <button class="btn green" onclick="speakCurrentFeed()">🔊 Hear Again</button>
+        <button class="btn green" onclick="speakCurrentFeed()" title="Hear Again">🔊</button>
       </div>
     </div>
   </section>
@@ -470,8 +659,7 @@ button, input { font: inherit; }
     <div class="topbar">
       <div class="left-tools">
         <button class="btn secondary" onclick="goHome()">🏠 Home</button>
-        <button class="btn" onclick="newHuntRound()">🔄 New Scene</button>
-      </div>
+              </div>
       <div class="right-tools">
         <div class="sticker-bar" id="huntStickerBar"><div class="stickers" id="huntStickers"></div></div>
       </div>
@@ -480,7 +668,7 @@ button, input { font: inherit; }
     <div id="huntScene" class="scene"></div>
     <div class="note" id="huntNote"></div>
     <div style="text-align:center; margin-top:14px;">
-      <button class="btn green" onclick="speakCurrentHunt()">🔊 Hear Again</button>
+      <button class="btn green" onclick="speakCurrentHunt()" title="Hear Again">🔊</button>
     </div>
   </section>
 
@@ -488,7 +676,7 @@ button, input { font: inherit; }
     <div class="topbar">
       <div class="left-tools">
         <button class="btn secondary" onclick="goHome()">🏠 Home</button>
-        <button class="btn" onclick="resetNameGame()">🔄 Reset Letters</button>
+        <button class="btn" onclick="resetNameGame()">🔁</button>
       </div>
       <div class="right-tools">
         <div class="sticker-bar" id="nameStickerBar"><div class="stickers" id="nameRibbon">🐎 🎀 Pony Parade Goal</div></div>
@@ -499,6 +687,43 @@ button, input { font: inherit; }
     <div class="letter-bank" id="letterBank"></div>
     <div class="note" id="nameNote"></div>
   </section>
+</div>
+
+
+<div class="parent-peek"><button onclick="toggleParentPanel()" title="Parent View">👤</button></div>
+
+<div class="parent-panel" id="parentPanel" onclick="if(event.target===this) toggleParentPanel()">
+  <div class="parent-card">
+    <h3>Parent View</h3>
+    <div class="setting-row">
+      <div>
+        <div style="font-weight:800;">Calm Mode</div>
+        <div style="font-size:.95rem;opacity:.85;">Softer colors, gentler feel, less intense motion.</div>
+      </div>
+      <label style="font-weight:800;"><input type="checkbox" id="calmToggle" onchange="toggleCalmMode()"> On</label>
+    </div>
+    <div class="setting-row">
+      <div>
+        <div style="font-weight:800;">Today's Progress</div>
+        <div style="font-size:.95rem;opacity:.85;">Saved on this device.</div>
+      </div>
+      <div>
+        <span class="small-stat" id="statFeed">Feed: 0</span>
+        <span class="small-stat" id="statHunt">Hunt: 0</span>
+        <span class="small-stat" id="statName">Name: 0</span>
+      </div>
+    </div>
+    <div class="setting-row">
+      <div>
+        <div style="font-weight:800;">Pony Personality</div>
+        <div style="font-size:.95rem;opacity:.85;">Encouraging pony phrases and reactions.</div>
+      </div>
+      <div>🐎✨</div>
+    </div>
+    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:14px;">
+      <button class="btn secondary" onclick="toggleParentPanel()">Close</button>
+    </div>
+  </div>
 </div>
 
 <div class="overlay" id="bigWinOverlay">
@@ -524,7 +749,12 @@ const state = {
   currentGame: 'home',
   currentFeedRound: null,
   currentHuntRound: null,
-  audioUnlocked: false
+  audioUnlocked: false,
+  calmMode: false,
+  stats: {feed:0,hunt:0,name:0},
+  misses: {},
+  mastery: {},
+  ponyVoiceIndex: 0
 };
 
 const feedRounds = [
@@ -650,7 +880,15 @@ function openGame(game) {
 }
 
 function updateStickerRow(id, count) {
-  $(id).textContent = count ? '🐎🏅 '.repeat(count).trim() : 'No pony prizes yet';
+  const el = $(id);
+  if (!el) return;
+  if (!count) {
+    el.classList.add('empty-slots');
+    el.innerHTML = '<span class="empty-slot"></span><span class="empty-slot"></span><span class="empty-slot"></span>';
+  } else {
+    el.classList.remove('empty-slots');
+    el.textContent = '🐎🏅 '.repeat(count).trim();
+  }
 }
 
 function animateFoodToHorse(fromEl, emoji, onDone) {
@@ -782,6 +1020,99 @@ function awardSticker(kind, fromEl) {
   setTimeout(() => maybeBigWin(kind), 620);
 }
 
+
+const ponyLines = {
+  success: ['🐴 Neigh! You got it!', '🐴 Yum yum yum!', '🐴 Great job, rider!', '🐴 That is my favorite!'],
+  retry: ['🐴 Try another one!', '🐴 Almost! Let\'s try again!', '🐴 Not that one, friend!'],
+  name: ['🐴 You found the right letter!', '🐴 Clip-clop, keep going!', '🐴 That fits!'],
+  big: ['🐴 Pony parade time!', '🐴 You did it!', '🐴 Ribbon winner!']
+};
+
+function nextPonyLine(group) {
+  const arr = ponyLines[group] || ponyLines.success;
+  state.ponyVoiceIndex = (state.ponyVoiceIndex + 1) % arr.length;
+  return arr[state.ponyVoiceIndex];
+}
+
+function setPonyBubble(id, text, clearMs=1400) {
+  const el = $(id);
+  if (!el) return;
+  el.textContent = text;
+  el.style.display = 'block';
+  if (clearMs) {
+    setTimeout(() => {
+      if (el) el.style.display = 'none';
+    }, clearMs);
+  }
+}
+
+function toggleParentPanel() {
+  $('parentPanel').classList.toggle('show');
+  $('calmToggle').checked = !!state.calmMode;
+  renderStats();
+}
+
+function toggleCalmMode() {
+  state.calmMode = $('calmToggle').checked;
+  document.body.classList.toggle('calm-mode', state.calmMode);
+  saveProgress();
+}
+
+function renderStats() {
+  $('statFeed').textContent = 'Feed: ' + (state.stats.feed || 0);
+  $('statHunt').textContent = 'Hunt: ' + (state.stats.hunt || 0);
+  $('statName').textContent = 'Name: ' + (state.stats.name || 0);
+}
+
+function saveProgress() {
+  const payload = {
+    calmMode: state.calmMode,
+    stats: state.stats,
+    misses: state.misses,
+    mastery: state.mastery,
+    childName: state.childName
+  };
+  try { localStorage.setItem('ponyReadingProgress', JSON.stringify(payload)); } catch (e) {}
+}
+
+function loadProgress() {
+  try {
+    const raw = localStorage.getItem('ponyReadingProgress');
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    state.calmMode = !!data.calmMode;
+    state.stats = data.stats || state.stats;
+    state.misses = data.misses || {};
+    state.mastery = data.mastery || {};
+    state.childName = data.childName || state.childName;
+    $('childName').value = state.childName;
+    document.body.classList.toggle('calm-mode', state.calmMode);
+  } catch (e) {}
+}
+
+function noteMiss(key) {
+  state.misses[key] = (state.misses[key] || 0) + 1;
+  saveProgress();
+}
+
+function noteSuccess(key) {
+  state.mastery[key] = (state.mastery[key] || 0) + 1;
+  if (state.misses[key] && state.misses[key] > 0) state.misses[key] -= 1;
+  saveProgress();
+}
+
+function weightedChoice(rounds, keyField) {
+  const weighted = [];
+  rounds.forEach(r => {
+    const key = r[keyField] || r.letter || r.prompt;
+    const misses = state.misses[key] || 0;
+    const mastery = state.mastery[key] || 0;
+    const weight = Math.max(1, 1 + misses * 3 - Math.floor(mastery / 3));
+    for (let i=0;i<weight;i++) weighted.push(r);
+  });
+  return shuffle(weighted)[0];
+}
+
 function maybeBigWin(kind) {
   if (kind === 'feed' && state.feedStickers >= 3) {
     state.feedStickers = 0;
@@ -791,7 +1122,7 @@ function maybeBigWin(kind) {
   if (kind === 'hunt' && state.huntStickers >= 3) {
     state.huntStickers = 0;
     updateStickerRow('huntStickers', state.huntStickers);
-    triggerBigWin('Trail Champion!', 'Three ribbons for Letter Hunt!');
+    triggerBigWin('Trail Champion!', nextPonyLine('big'));
   }
 }
 
@@ -827,10 +1158,10 @@ function speakCurrentHunt() {
 }
 
 function newFeedRound() {
-  state.currentFeedRound = shuffle(feedRounds)[0];
+  state.currentFeedRound = weightedChoice(feedRounds, 'letter');
   const round = state.currentFeedRound;
   $('feedPrompt').textContent = round.prompt;
-  $('feedNote').textContent = 'Pick the right food for the pony.';
+  $('feedNote').textContent = '🐴 Pick a yummy snack!';
   $('feedCloud').textContent = '🐴 ' + round.prompt.replace('Feed the pony something that starts with ', '').replace('!', '');
   updateStickerRow('feedStickers', state.feedStickers);
   const box = $('feedChoices');
@@ -845,14 +1176,21 @@ function newFeedRound() {
         animateFoodToHorse(b, choice.emoji, () => {
           $('feedNote').textContent = 'Yum! The pony likes ' + choice.label + '!';
           $('feedCloud').textContent = '🐴 Yum!';
-          playAudio('winAudio');
+          setPonyBubble('ponyBubbleFeed', nextPonyLine('success'));
+          noteSuccess(round.letter);
+          state.stats.feed += 1;
+          renderStats();
+          playAudio(state.calmMode ? 'tapAudio' : 'winAudio');
           awardSticker('feed', b);
-          setTimeout(newFeedRound, 1000);
+          saveProgress();
+          setTimeout(newFeedRound, state.calmMode ? 1300 : 1000);
         });
       } else {
         playAudio('tapAudio');
         $('feedNote').textContent = 'Not that one — try again!';
         $('feedCloud').textContent = '🐴 Try a different snack!';
+        setPonyBubble('ponyBubbleFeed', nextPonyLine('retry'));
+        noteMiss(round.letter);
       }
     };
     box.appendChild(b);
@@ -860,10 +1198,10 @@ function newFeedRound() {
 }
 
 function newHuntRound() {
-  state.currentHuntRound = shuffle(huntRounds)[0];
+  state.currentHuntRound = weightedChoice(huntRounds, 'prompt');
   const round = state.currentHuntRound;
   $('huntPrompt').textContent = round.prompt;
-  $('huntNote').textContent = 'Tap the right thing in the scene.';
+  $('huntNote').textContent = '🐴 Can you find it?';
   updateStickerRow('huntStickers', state.huntStickers);
   const scene = $('huntScene');
   scene.className = 'scene ' + round.scene;
@@ -883,12 +1221,17 @@ function newHuntRound() {
       if (item.ok) {
         animateHorseToChoice(b, scene, () => {
           $('huntNote').textContent = 'You found the ' + item.label + '!';
-          playAudio('winAudio');
+          noteSuccess(round.prompt);
+          state.stats.hunt += 1;
+          renderStats();
+          playAudio(state.calmMode ? 'tapAudio' : 'winAudio');
           awardSticker('hunt', b);
-          setTimeout(newHuntRound, 1100);
+          saveProgress();
+          setTimeout(newHuntRound, state.calmMode ? 1450 : 1100);
         });
       } else {
-        $('huntNote').textContent = 'Not that one — try again!';
+        $('huntNote').textContent = nextPonyLine('retry');
+        noteMiss(round.prompt);
       }
     };
     row.appendChild(b);
@@ -939,19 +1282,22 @@ function placeNextLetter(letter, btn) {
     btn.disabled = true;
     btn.style.opacity = '.35';
     btn.style.transform = 'scale(.95)';
-    $('nameNote').textContent = nextIndex === state.childName.length - 1 ? 'You spelled the whole name!' : 'Great! ' + letter + ' goes here.';
-    playAudio(nextIndex === state.childName.length - 1 ? 'bigAudio' : 'winAudio');
+    $('nameNote').textContent = nextIndex === state.childName.length - 1 ? 'You spelled the whole name!' : nextPonyLine('name');
+    playAudio(nextIndex === state.childName.length - 1 ? (state.calmMode ? 'winAudio' : 'bigAudio') : (state.calmMode ? 'tapAudio' : 'winAudio'));
     if (state.nameProgress.every(Boolean)) {
+      state.stats.name += 1;
+      renderStats();
+      saveProgress();
       triggerBigWin('Name Champion!', state.childName + ' is all spelled out!');
     }
   } else {
     playAudio('tapAudio');
-    $('nameNote').textContent = 'That letter comes later. Try ' + expected + '.';
+    $('nameNote').textContent = nextPonyLine('retry') + ' Try ' + expected + '.';
   }
 }
 
 function resetNameGame() {
-  $('nameNote').textContent = 'Tap the letters in order.';
+  $('nameNote').textContent = '🐴 Let\'s build the name!';
   $('nameRibbon').textContent = '🐎 🎀 Pony Parade Goal';
   buildNameUI();
 }
@@ -959,7 +1305,9 @@ function resetNameGame() {
 document.addEventListener('pointerdown', unlockAudio, {once:false});
 $('bigWinOverlay').addEventListener('click', () => $('bigWinOverlay').classList.remove('show'));
 
+loadProgress();
 saveName();
+renderStats();
 goHome();
 </script>
 </body>
